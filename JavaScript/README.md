@@ -3,6 +3,7 @@
 Format and style these readme's better
 Look up most popular JS array methods on youtube
 
+Data Types
 
 Arrow Syntax:
 
@@ -18,6 +19,7 @@ selectors such as getElementById ect
 loops, for, for of / forEach + index:
 
 forEach
+
 
 <br><br>
 
@@ -61,6 +63,164 @@ Mutability:
 A shallow copy of an object creates a new object with the same first-level properties as the original. However, it does not create copies of nested objects; instead, it copies their references. Thus, if you modify a nested object in the copy, the change will also reflect in the original object, and vice versa. Shallow copying is useful when you want to duplicate an object's structure without needing to create independent copies of its internal objects.
 
 A deep copy goes further by duplicating every level of an object, including all nested objects. This means that the copy and the original are completely independent; changes made to deeply nested objects in the copy do not affect the original, and vice versa. Deep copying is essential when you need to work with a truly separate copy of an object without affecting the original, preserving the integrity of nested structures.
+
+<br><br>
+
+# Array Destructuring
+
+Array destructuring is a syntax introduced in ES6 that allows for unpacking elements from array literals into individual variables, making working with arrays more efficient and readable.
+
+
+Syntax:
+```
+const [element1, element2] = array;
+```
+
+Examples:
+
+Basic Destructuring
+```
+const numbers = [1, 2, 3];
+const [first, second] = numbers;
+
+console.log(first);  // 1
+console.log(second); // 2
+```
+
+Skipping Elements
+```
+const fruits = ["Apple", "Banana", "Orange"];
+const [first, , third] = fruits;
+
+console.log(first); // "Apple"
+console.log(third); // "Orange"
+```
+
+Nested Arrays
+```
+const colors = ["red", ["green", "darkGreen"], "blue"];
+const [primary, [secondary, tertiary]] = colors;
+
+console.log(primary);   // "red"
+console.log(secondary); // "green"
+console.log(tertiary);  // "darkGreen"
+```
+
+Swapping Variables
+```
+let a = 1, b = 2;
+[a, b] = [b, a];
+
+console.log(a); // 2
+console.log(b); // 1
+```
+
+Function Return Values
+```
+function getCoordinates() {
+  return [17.385044, 78.486671]; // Example coordinates
+}
+
+const [latitude, longitude] = getCoordinates();
+
+console.log(latitude);  // 17.385044
+console.log(longitude); // 78.486671
+```
+
+
+Use cases:
+
+1. Ignoring Unwanted Values: Provides a convenient way to skip over elements of an array that are not needed in the current context, making it easier to focus on relevant data.
+2. Function Parameters: Especially useful in functions that accept arrays as arguments, allowing for direct unpacking of array elements into parameters for immediate use within the function.
+3. Multiple Return Values: Simplifies the extraction of multiple values returned from a function into separate variables, making the code cleaner and more intuitive.
+4. Swapping Variables: Offers an elegant, concise way to swap the values of two variables without needing a temporary variable, enhancing code simplicity.
+5. Iterating Over Arrays: Improves readability and efficiency when iterating over arrays of arrays (like matrixes or CSV data), allowing for direct access to nested values.
+
+<br><br>
+
+# Object Destructuring
+
+Object destructuring is a powerful feature in JavaScript (introduced with ES6) that allows for unpacking values from objects into distinct variables.
+
+Object destructuring enhances code readability and efficiency, streamlining the process of working with objects and their properties in JavaScript.
+
+The syntax is both concise and readable, significantly simplifying the task of extracting multiple properties from objects.
+
+syntax:
+```
+const { property1, property2 } = object;
+```
+
+
+Exmples:
+
+Basic Destructuring
+```
+const person = { name: 'John Doe', age: 30 };
+const { name, age } = person;
+
+console.log(name); // "John Doe"
+console.log(age); // 30
+```
+
+
+Destructuring with New Variable Names
+```
+const person = { name: 'Jane Doe', age: 28 };
+const { name: fullName, age: personAge } = person;
+
+console.log(fullName); // "Jane Doe"
+console.log(personAge); // 28
+```
+
+
+
+Destructuring with Defaults
+
+```
+const person = { name: 'Emily' };
+const { name, age = 25 } = person;
+
+console.log(name); // "Emily"
+console.log(age); // 25 (default used)
+
+```
+
+Nested Object Destructuring
+```
+const person = {
+  name: 'Chris',
+  age: 34,
+  contact: { email: 'chris@example.com', phone: '123-456-7890' },
+};
+const {
+  contact: { email, phone },
+} = person;
+
+console.log(email); // "chris@example.com"
+console.log(phone); // "123-456-7890"
+```
+
+Function Parameter Destructuring
+```
+function introduce({ name, age }) {
+  console.log(`My name is ${name} and I am ${age} years old.`);
+}
+
+const person = { name: 'Alex', age: 22 };
+introduce(person); // "My name is Alex and I am 22 years old."
+```
+
+
+
+Use Cases:
+
+1. Function Parameters: Simplifies working with objects as function parameters by directly unpacking the needed properties within the function's signature, reducing the need for repetitive property access within the function body.
+2. Configuration Objects: Facilitates the use of configuration objects in function calls, allowing for easy extraction of configuration properties without manually digging into the object structure.
+3. React Component Props: In React and other component-based libraries, destructuring is commonly used to unpack props, making the code cleaner and more readable.
+4. Multiple Return Values: Allows for returning multiple values from a function in an object and unpacking these values concisely, simulating named return values.
+5. Swapping Values: Enables an elegant way to swap the values of two variables without needing a temporary variable.
+
 
 <br><br>
 
