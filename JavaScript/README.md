@@ -1,24 +1,40 @@
 # JavaScript Notes
 
+## Table Of Contents
+
+- [Variables](#variables)
+- [Data Types](#data-types)
+- [Functions](#functions)
+  - [Traditional Functions](#functions)
+  - [Arrow Functions](#arrow-functions)
+- [Destructuring](#array-destructuring)
+  - [Array Destructuring](#array-destructuring)
+  - [Object Destructuring](#object-destructuring)
+- [Array Methods](#array-methods)
+  - [Includes](#includes)
+  - [Join](#join)
+  - [Filter](#filter)
+  - [Map](#map)
+- [Code Snippets](#code-snippets)
+  - [Generate A Random Number](#generate-a-random-number)
+
+<br>
+// Add anchor tags here to other my other notes repos - HTML, CSS, TypeScript, React ect
+
+<br><br><br>
+Notes to write next:
+
+* More of the basic array methods
+* Rest Parameters (ES6)
+* Spread operator
+* Logical operators
+* Math functions
+* Selectors such as getElementById ect
+* Loops, for, for of / forEach + index:
+* forEach
+
 Format and style these readme's better
 Look up most popular JS array methods on youtube
-
-Data Types
-
-Arrow Syntax:
-
-
-Single Line Implicit Return:
-
-math functions
-
-functions:
-
-selectors such as getElementById ect
-
-loops, for, for of / forEach + index:
-
-forEach
 
 
 <br><br>
@@ -58,11 +74,226 @@ Mutability:
 
 <br><br>
 
+# Data Types
+
+JavaScript variables can hold different types of data, classified into two main categories: primitive types and reference types.
+
+JavaScript is a dynamically typed language, meaning variables do not need to be declared with a data type, and their types can change at runtime.<br>
+Primitive types are immutable and operated on by value, whereas reference types (objects) are mutable and operated on by reference.<br>
+Understanding these types and their behaviors is crucial for effective JavaScript programming, as it affects variable declaration, function return values, and overall data manipulation within your applications.
+
+## Primitive Types
+
+String: Represents textual data.
+```
+let name = "John Doe";
+```
+
+Number: Represents both integer and floating-point numbers.
+```
+let age = 25; // Integer
+let price = 99.99; // Floating-point
+BigInt: Represents integers with arbitrary precision.
+let bigNumber = 1234567890123456789012345678901234567890n;
+```
+
+Boolean: Represents a logical entity with two values: true and false.
+```
+let isAvailable = true;
+```
+
+Undefined: Represents a variable that has not been assigned a value.
+```
+let result;
+console.log(result); // undefined
+Null: Represents the intentional absence of any object value.
+let empty = null;
+```
+
+Symbol: Represents a unique, immutable identifier.
+```
+let symbol = Symbol("description");
+```
+
+
+## Reference Types (Objects)
+
+Object: Represents instances of keyed collections and more complex entities.
+```
+let person = { name: "John Doe", age: 30 };
+```
+
+Array: Represents a list-like object of ordered values.
+```
+let numbers = [1, 2, 3, 4, 5];
+```
+
+Function: Represents code that can be invoked.
+```
+function greet() {
+  console.log("Hello, World!");
+}
+```
+
+<br><br>
 
 # Shallow Copy vs Deep Copy
 A shallow copy of an object creates a new object with the same first-level properties as the original. However, it does not create copies of nested objects; instead, it copies their references. Thus, if you modify a nested object in the copy, the change will also reflect in the original object, and vice versa. Shallow copying is useful when you want to duplicate an object's structure without needing to create independent copies of its internal objects.
 
 A deep copy goes further by duplicating every level of an object, including all nested objects. This means that the copy and the original are completely independent; changes made to deeply nested objects in the copy do not affect the original, and vice versa. Deep copying is essential when you need to work with a truly separate copy of an object without affecting the original, preserving the integrity of nested structures.
+
+<br><br>
+
+# Functions
+
+Functions in JavaScript are blocks of code designed to perform a particular task, and they are a fundamental building block of the language.<br>
+JavaScript functions can be defined in several ways and can be called or invoked to execute the block of code whenever needed.
+
+Also read [Arrow functions](#arrow-functions) which became available in ES6, they provide a modern and concise syntax for writing function expressions.
+
+
+Function Declaration<br>
+A function declaration defines a function with the specified parameters.
+
+```
+function sayHello(name) {
+  console.log(`Hello, ${name}!`);
+}
+
+sayHello('Alice'); // Output: Hello, Alice!
+```
+
+Function Expression<br>
+A function expression assigns an anonymous function to a variable. Function expressions can be named or anonymous.
+```
+const greet = function(name) {
+  console.log(`Hello, ${name}!`);
+};
+
+greet('Bob'); // Output: Hello, Bob!
+```
+
+
+Immediately Invoked Function Expression (IIFE)<br>
+An IIFE is a function that runs as soon as it is defined.
+```
+(function() {
+  console.log('This runs right away');
+})();
+```
+
+Parameters and Arguments<br>
+Functions can accept parameters and be invoked with arguments.
+```
+function multiply(a, b) {
+  return a * b;
+}
+
+console.log(multiply(2, 4)); // Output: 8
+```
+
+Default Parameters (ES6)<br>
+Default parameters allow named parameters to be initialized with default values if no value or undefined is passed.
+```
+function greet(name = 'Guest') {
+  console.log(`Hello, ${name}!`);
+}
+
+greet(); // Output: Hello, Guest!
+```
+Rest Parameters (ES6)<br>
+Rest parameters allow us to represent an indefinite number of arguments as an array.
+```
+function sum(...numbers) {
+  return numbers.reduce((acc, current) => acc + current, 0);
+}
+
+console.log(sum(1, 2, 3, 4)); // Output: 10
+```
+
+Use Cases:
+
+1. Code Reusability: Write code once and reuse it multiple times with different arguments.
+2. Modularizing Code: Break down complex problems into smaller, manageable pieces.
+3. Event Handling: Define behavior for user interactions in the browser.
+4. Callbacks and Asynchronous Programming: Functions allow for asynchronous execution flows, such as in AJAX requests, timers, and event handlers.
+5. Closures: Functions can create closures, which allow for private variables and methods, enabling data encapsulation.
+
+
+<br><br>
+
+# Arrow Functions
+
+Arrow functions, introduced in ES6 (ECMAScript 2015), offer a concise syntax for writing function expressions in JavaScript.<br>
+They are particularly useful for short functions and are often used in callback-based code, like event handlers or setTimeout.
+
+Arrow functions streamline function declaration and offer lexical scoping of this, making them a powerful feature for modern JavaScript development.<br>
+However, they are not suitable for all situations, such as methods defined in object literals or constructors, where traditional function expressions or declarations might be more appropriate.
+
+Syntax:
+
+The basic syntax of an arrow function is as follows:
+```
+const functionName = (parameters) => {
+  // function body
+};
+```
+If the function has only one parameter, parentheses around the parameter list are optional.<br>
+If the function body contains just a single statement, you can omit the curly braces and the return statement.<br><br>
+
+Code Examples:
+
+Basic Arrow Function
+```
+const greet = () => {
+  console.log("Hello, World!");
+};
+
+greet(); // Output: Hello, World!
+```
+
+With Parameters
+```
+const add = (a, b) => {
+  return a + b;
+};
+
+console.log(add(5, 3)); // Output: 8
+```
+
+Single-Line Function<br>
+For a single-line function that returns a value, you can omit the braces and the return keyword:
+```
+const square = x => x * x;
+
+console.log(square(4)); // Output: 16
+```
+
+Returning Objects<br>
+To return an object literal directly, enclose the object in parentheses:
+```
+const getObject = () => ({ name: "John", age: 30 });
+
+console.log(getObject()); // Output: { name: 'John', age: 30 }
+```
+
+Arrow Functions as Callbacks<br>
+Arrow functions are often used for callbacks due to their concise syntax:
+```
+const numbers = [1, 2, 3, 4, 5];
+
+const squares = numbers.map(number => number * number);
+
+console.log(squares); // Output: [1, 4, 9, 16, 25]
+```
+
+Use Cases:
+
+1. Callbacks and Array Methods: Ideal for short callback functions passed to methods like map(), filter(), reduce(), etc.
+2. Event Handlers: Concisely define event handlers for DOM elements.
+3. Functional Programming: Supports a more functional style of coding with concise function expressions.
+4. Inline Functions: Useful for defining inline functions where brevity is valued.
+5. Lexical this: Arrow functions capture the this value of the enclosing context, making them suitable for use in methods that need to access the this of their containing object.
 
 <br><br>
 
@@ -224,7 +455,7 @@ Use Cases:
 
 <br><br>
 
-# Array Functions
+# Array Methods
 
 <br>
 
