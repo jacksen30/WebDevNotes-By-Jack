@@ -15,6 +15,7 @@
   - [Join](#join)
   - [Filter](#filter)
   - [Map](#map)
+  - [forEach](#foreach)
 - [Code Snippets](#code-snippets)
   - [Generate A Random Number](#generate-a-random-number)
 
@@ -32,6 +33,7 @@ Notes to write next:
 * Selectors such as getElementById ect
 * Loops, for, for of / forEach + index:
 * forEach
+* Add a glossary / word dictionary for words such as, callback function
 
 Format and style these readme's better
 Look up most popular JS array methods on youtube
@@ -639,6 +641,8 @@ The .map() method creates a new array populated with the results of calling a pr
 
 It is a Non-mutating Method: .map() does not change the original array but instead returns a new array.
 
+If you don't need to create / return a new array the [.forEach() method](#foreach) is most likely more approriate to use.
+
 Array Length Preserved: The returned array will have the same length as the input array, but with transformed elements.
 
 The map callback function can take in 3 arguments:
@@ -680,6 +684,20 @@ const lengths = ['Bilbo', 'Gandalf', 'Nazgul'].map(item => item.length);
 console.log(lengths); // Output: [5, 7, 6]
 ```
 
+Using the second optional "index" parameter (So we can use it in the returned array)
+```
+// Convert these Miles to KM!
+const distanceWalkedMilesArr = [140, 153, 161, 153, 128, 148];
+
+const conversionFactorMilesToKm = 1.6;
+
+const distanceWalkedKmArr = distanceWalkedMilesArr.map((distanceMiles, index) => {
+    return `Month ${index}: ${distanceMiles * conversionFactorMilesToKm}KM`;
+})
+
+console.log(distanceWalkedKmArr);  Output: // ["Month 0: 224KM", "Month 1: 244.8KM", "Month 2: 257.6KM", "Month 3: 244.8KM", "Month 4: 204.8KM", "Month 5: 236.8KM"]
+```
+
 Combining .map() with Other Methods: It's common to chain .map() with other array methods like .filter() to perform complex transformations and calculations.
 ```
 const products = [
@@ -701,6 +719,71 @@ Use Cases:
 3. Extracting Properties: Creating an array that contains a specific property value from each object in an array of objects.
 4. Adding or Modifying Object Properties: Generating a new array of objects by adding new properties or modifying existing ones in each object of an array.
 5. Data Processing for Visual Representation: Preparing data for visual representation, such as charting, by transforming numerical values or aggregating information.
+
+<br><br>
+
+## forEach
+
+The forEach method is an Array method that provides a simple way to iterate over the elements of an array,<br>
+providing a clear and concise way to operate on each element of an array without the need for traditional loop constructs.<br>
+It executes a provided function once for each array element, in order.<br>
+
+Unlike map or filter, it doesn't return a new array and is used for side effects.<br>
+If you need to create / return a new array the [.map() method](#map) is most likely more approriate to use.
+
+Syntax:
+```
+array.forEach(function(currentValue, index, arr), thisValue)
+```
+
+* currentValue: The current element being processed in the array.
+* index (Optional): The index of the current element being processed.
+* arr (Optional): The array forEach was called upon.
+* thisValue (Optional): A value to use as this when executing function.
+<br><br>
+
+Examples:
+
+Basic Usage<br>
+Iterate over an array, printing each element to the console.
+```
+const fruits = ['apple', 'banana', 'cherry'];
+fruits.forEach(function(item) {
+  console.log(item);
+});
+// Output: apple
+//         banana
+//         cherry
+```
+
+Using Arrow Function <br>
+An arrow function makes the syntax more concise.
+```
+const numbers = [1, 2, 3];
+numbers.forEach(number => console.log(number * 2));
+// Output: 2
+//         4
+//         6
+```
+
+Accessing Index and Array<br>
+You can also access the index of the current element and the array itself.
+```
+const names = ['Alice', 'Bob', 'Charlie'];
+names.forEach((name, index, arr) => {
+  console.log(`${index + 1}: ${name} (Array length: ${arr.length})`);
+});
+// Output: 1: Alice (Array length: 3)
+//         2: Bob (Array length: 3)
+//         3: Charlie (Array length: 3)
+```
+
+Use Cases:
+1. Iterating Over Elements: To perform operations on each item of an array, such as logging to the console or appending to a DOM element.
+2. Database Operations: Applying functions to each item of an array fetched from a database, like transforming data shapes or values.
+3. Asynchronous Operations: Executing asynchronous operations in a loop, such as sending API requests for each item in an array (though map with Promise.all might be better for handling asynchronous results).
+4. Data Manipulation: Modifying the elements of an array in place, for example, adding properties to objects in an array.
+5. Side Effects: Performing operations that have side effects, such as updating the UI or logging to an external service, for each item in the array.
 
 <br><br>
 
