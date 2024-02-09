@@ -11,6 +11,10 @@
   - [Array Destructuring](#array-destructuring)
   - [Object Destructuring](#object-destructuring)
 - [Array Methods](#array-methods)
+  - [Push](#push)
+  - [Pop](#pop)
+  - [Unshift](#unshift)
+  - [Shift](#shift)
   - [Includes](#includes)
   - [Join](#join)
   - [Filter](#filter)
@@ -31,9 +35,10 @@ Notes to write next:
 * Logical operators
 * Math functions
 * Selectors such as getElementById ect
-* Loops, for, for of / forEach + index:
+* for loop - with the use of break and continue - refer to scrimba - JS mini Projects - for loop break and continue - lesson
+* Loops, for, for of /
 * forEach
-* Add a glossary / word dictionary for words such as, callback function
+* Add a glossary / word dictionary for words such as, callback function, return, closure, break, continue
 
 Format and style these readme's better
 Look up most popular JS array methods on youtube
@@ -460,6 +465,234 @@ Use Cases:
 # Array Methods
 
 <br>
+
+## push
+
+The push() method adds one or more elements to the end of an array and returns the new length of the array.
+
+The push() method directly modifies the original array, unlike methods like concat which return a new array.<br>
+After adding the elements, push() returns the new length of the array, allowing for immediate checks on the array size.
+
+Can be ued to add any type of element to the array, including strings, numbers, objects, or even other arrays.
+
+
+Syntax:
+```
+array.push(element1, element2, ..., elementN)
+
+// element1, element2, ..., elementN: The elements to add to the end of the array.
+```
+
+Code Examples
+Adding a Single Element
+```
+const fruits = ['apple', 'banana'];
+const newLength = fruits.push('orange');
+
+console.log(fruits);      // Output: ['apple', 'banana', 'orange']
+console.log(newLength);   // Output: 3
+```
+
+Adding Multiple Elements
+```
+const numbers = [1, 2, 3];
+numbers.push(4, 5);
+
+console.log(numbers); // Output: [1, 2, 3, 4, 5]
+```
+
+Using push() in a Function
+```
+function addElementToEnd(array, element) {
+  array.push(element);
+  return array;
+}
+
+const originalArray = [1, 2, 3];
+const resultArray = addElementToEnd(originalArray, 4);
+
+console.log(resultArray); // Output: [1, 2, 3, 4]
+```
+
+Use Cases:
+
+1. Dynamic Array Construction: Useful when you need to construct an array dynamically, such as collecting user inputs or processing data in chunks.
+2. Stack Implementation: The push() method, combined with pop(), can be used to implement a stack (LIFO - Last In, First Out data structure) in JavaScript.
+3. Appending Elements: Quickly append elements to the end of an array without worrying about the current length of the array.
+
+<br><br>
+
+## pop
+
+The pop() method removes the last element from an array and returns that element.<br>
+This method allows for efficient removal of the last element and dynamic adjustment of array length.
+
+* No arguments are needed.
+* Returns the removed element from the array.
+* If the array is empty, undefined is returned.
+
+Syntax:
+```
+array.pop()
+```
+
+
+Code Examples:
+
+Removing the Last Element
+```
+const fruits = ['apple', 'banana', 'cherry'];
+const removedFruit = fruits.pop();
+
+console.log(fruits);          // Output: ['apple', 'banana']
+console.log(removedFruit);    // Output: 'cherry'
+```
+
+Using pop() in a Loop
+```
+const numbers = [1, 2, 3, 4, 5];
+while(numbers.length > 0) {
+  let removedNumber = numbers.pop();
+  console.log(`Removed: ${removedNumber}`);
+}
+
+// Output: Removed: 5
+//         Removed: 4
+//         Removed: 3
+//         Removed: 2
+//         Removed: 1
+```
+
+Empty Array Case
+```
+const emptyArray = [];
+const result = emptyArray.pop();
+
+console.log(result); // Output: undefined
+```
+
+Use Cases:
+
+1. Stack Implementation: Just like push(), the pop() method is integral to implementing stack behavior (LIFO - Last In, First Out) in JavaScript arrays.
+2. Undo Functionality: In applications where actions are stored sequentially, using pop() can help in implementing undo functionality by removing the most recent action.
+3. Processing and Removing Elements: Useful for algorithms that need to process elements from the end of the array and remove them as part of the process.
+
+<br><br>
+
+## unshift
+
+The unshift() method adds one or more elements to the beginning of an array and returns the new length of the array.<br>
+The unshift() method enables efficient addition of elements at the start of an array and adjusting the array's length and element positions accordingly.
+
+* The unshift() method mutates the original array by adding new elements to its start.
+* Existing elements are shifted to a higher index to make room for the new elements.
+* Returns the new length of the array after adding the elements.
+
+Syntax:
+```
+array.unshift(element1, element2, ..., elementN);
+
+// element1, element2, ..., elementN: The elements to add to the beginning of the array.
+```
+
+Code Examples:
+
+Adding a Single Element
+```
+const fruits = ['banana', 'cherry'];
+const newLength = fruits.unshift('apple');
+
+console.log(fruits);       // Output: ['apple', 'banana', 'cherry']
+console.log(newLength);    // Output: 3
+```
+
+Adding Multiple Elements
+```
+const numbers = [3, 4];
+numbers.unshift(1, 2);
+
+console.log(numbers); // Output: [1, 2, 3, 4]
+```
+
+Using unshift() in a Queue
+
+While shift() and unshift() can both be used for queue operations, unshift() adds elements to the start, which could be part of a reverse queue operation.
+```
+const queue = [];
+queue.unshift(1); // Add to the queue
+queue.unshift(2); // Add to the queue
+
+console.log(queue.pop()); // Process from the end
+console.log(queue.pop()); // Process from the end
+// Output: 2
+// Output: 1
+```
+
+Use Cases:
+
+1. Queue Management: Adding new tasks or items to the beginning of a queue, especially in scenarios where the most recent items should be processed first.
+2. Prepending Items: Useful for situations where you need to add elements to the start of an array, like when maintaining a list of items in reverse chronological order.
+3. Dynamic Data Structures: Manipulating data structures where elements need to be dynamically added to the beginning of an array structure.
+
+<br><br>
+
+
+## shift
+
+The shift() method removes the first element from an array and returns that removed element.<br>
+
+The shift method mutates the original array by removing its first element.<br>
+All remaining elements are shifted to a new index that is one less than their previous index.
+
+* No arguments are required.
+* Returns the removed element from the array.
+* If the array is empty, it returns undefined.
+
+Syntax:
+```
+array.shift()
+```
+
+Code Examples:
+
+Removing the First Element
+```
+const fruits = ['apple', 'banana', 'cherry'];
+const firstFruit = fruits.shift();
+
+console.log(fruits);         // Output: ['banana', 'cherry']
+console.log(firstFruit);     // Output: 'apple'
+```
+
+Iterating and Removing Elements
+```
+const numbers = [1, 2, 3, 4, 5];
+while(numbers.length) {
+  let removedNumber = numbers.shift();
+  console.log(`Removed: ${removedNumber}`);
+}
+
+// Output: Removed: 1
+//         Removed: 2
+//         Removed: 3
+//         Removed: 4
+//         Removed: 5
+```
+
+Empty Array Case
+```
+const emptyArray = [];
+const result = emptyArray.shift();
+
+console.log(result); // Output: undefined
+```
+
+Use Cases:
+1. Queue Implementation: The shift() method is used to implement queue behavior (FIFO - First In, First Out) in JavaScript arrays, especially in combination with push() to add new elements to the end of the queue.
+2. Processing Tasks: Useful in scenarios where tasks or items need to be processed in the order they were added.
+3. Sequential Data Handling: For managing sequential data where the oldest data (first added) needs to be processed or removed first.
+
+<br><br>
 
 ## includes
 
