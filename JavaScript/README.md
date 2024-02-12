@@ -20,6 +20,7 @@
   - [Filter](#filter)
   - [Map](#map)
   - [forEach](#foreach)
+  - [Reduce](#reduce)
   - [Slice](#slice)
   - [Splice](#splice)
 - [Code Snippets](#code-snippets)
@@ -32,6 +33,8 @@
 Notes to write next:
 
 * SPLICE
+* REDUCE METHOD
+* DEFAULT PARAMETERS
 
 * More of the basic array methods
 * Rest Parameters (ES6)
@@ -1021,6 +1024,89 @@ Use Cases:
 3. Asynchronous Operations: Executing asynchronous operations in a loop, such as sending API requests for each item in an array (though map with Promise.all might be better for handling asynchronous results).
 4. Data Manipulation: Modifying the elements of an array in place, for example, adding properties to objects in an array.
 5. Side Effects: Performing operations that have side effects, such as updating the UI or logging to an external service, for each item in the array.
+
+<br><br>
+
+## reduce
+
+The reduce() method executes a reducer function on each element of the array, resulting in a single output value.<br>
+It's designed to accumulate the array's elements into a single value, using a function that is applied to each element in sequence and carries forward the cumulative result.
+
+
+The reduce method is versatile, It can be used for more than just arithmetic operations, Its suitable for transforming arrays into any aggregated form.<br>
+It always returns a single value, even if that value is an array or object.<br>
+Providing an initial value is optional but recommended as it ensures the method behaves predictably for empty arrays or arrays with a single element.
+
+Syntax:
+```
+array.reduce(function(accumulator, currentValue, currentIndex, array), initialValue);
+```
+* accumulator: The accumulated value previously returned in the last invocation of the callback, or initialValue, if supplied.
+* currentValue: The current element being processed in the array.
+* currentIndex (Optional): The index of the current element being processed in the array.
+* array (Optional): The array reduce() was called upon.
+* initialValue (Optional): A value to use as the first argument to the first call of the callback. If no initial value is supplied, the first element in the array will be used as the initial accumulator value, and currentValue will start from the second element.<br><br>
+
+Code Examples:
+
+Summing an Array of Numbers
+```
+const numbers = [1, 2, 3, 4];
+const sum = numbers.reduce((acc, current) => acc + current, 0);
+
+console.log(sum); // Output: 10
+```
+
+Flattening an Array of Arrays
+```
+const arrays = [[1, 2], [3, 4], [5, 6]];
+const flat = arrays.reduce((acc, array) => acc.concat(array), []);
+
+console.log(flat); // Output: [1, 2, 3, 4, 5, 6]
+```
+
+Object Counting<br>
+A common use case is to use reduce() to count the occurrences of items in an array and produce an object as a result:
+```
+const fruits = ['apple', 'banana', 'apple', 'orange', 'banana'];
+const count = fruits.reduce((acc, fruit) => {
+  acc[fruit] = (acc[fruit] || 0) + 1;
+  return acc;
+}, {});
+
+console.log(count); // Output: { apple: 2, banana: 2, orange: 1 }
+```
+
+Aggregating data from an array of objects.<br>
+In this example (calculating the total cost of all items in the array)
+```
+const itemsToBuy = [
+  {
+    item: 'text books',
+    cost: 100
+  },
+  {
+    item: 'laptop',
+    cost: 500
+  },
+  {
+    item: 'iphone 12',
+    cost: 400
+  },
+]
+
+const totalSavingsReq = itemsToBuy.reduce((acc, current) => acc + current.cost, 0); // Initial value of the accumulator is set to 0, to ensure acc starts with a value of 0 not an object.
+
+console.log(totalSavingsReq)  // Output: 1000
+```
+
+Use Cases:
+
+1. Aggregation: Summing up numbers, concatenating strings, or accumulating values into a single output.
+2. Data Transformation: Transforming an array of objects into a different structure, like a keyed object map.
+3. Flattening Arrays: Combining nested arrays into a single array.
+4. Counting Instances: Counting the occurrences of values in an array.
+5. Pipeline: Executing a sequence of functions on an initial value where each function's output is the next function's input.
 
 <br><br>
 
