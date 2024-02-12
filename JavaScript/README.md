@@ -20,6 +20,8 @@
   - [Filter](#filter)
   - [Map](#map)
   - [forEach](#foreach)
+  - [Slice](#slice)
+  - [Splice](#splice)
 - [Code Snippets](#code-snippets)
   - [Generate A Random Number](#generate-a-random-number)
 
@@ -28,6 +30,8 @@
 
 <br><br><br>
 Notes to write next:
+
+* SPLICE
 
 * More of the basic array methods
 * Rest Parameters (ES6)
@@ -1017,6 +1021,71 @@ Use Cases:
 3. Asynchronous Operations: Executing asynchronous operations in a loop, such as sending API requests for each item in an array (though map with Promise.all might be better for handling asynchronous results).
 4. Data Manipulation: Modifying the elements of an array in place, for example, adding properties to objects in an array.
 5. Side Effects: Performing operations that have side effects, such as updating the UI or logging to an external service, for each item in the array.
+
+<br><br>
+
+## slice
+
+The slice() method returns a shallow copy of a portion of an array into a new array object selected from start to end (end not included) without modifying the original array.
+
+The slice() method does not alter the original array, making it useful for creating new arrays based on existing ones without side effects.<br>
+Creates a [Shallow Copy](#shallow-copy-vs-deep-copy) : Elements of the original array are copied as references if they are objects, meaning that if the objects are modified, those changes will be reflected in both the original and new array.
+
+Syntax
+```
+array.slice(start, end)
+```
+
+* start (Optional): Zero-based index at which to start extraction. A negative index can be used, indicating an offset from the end of the sequence. If omitted, slice begins from index 0.
+* end (Optional): Zero-based index before which to end extraction. slice extracts up to but not including end. A negative index can be used, indicating an offset from the end of the sequence. If omitted, slice extracts through the end of the sequence (array.length). <br><br>
+
+Code Examples:
+
+Extracting a Portion of an Array
+```
+const fruits = ['apple', 'banana', 'cherry', 'date'];
+const citrus = fruits.slice(1, 3);
+
+console.log(citrus); // Output: ['banana', 'cherry']
+```
+
+Using Negative Indices
+```
+const numbers = [1, 2, 3, 4, 5];
+const lastThree = numbers.slice(-3);
+
+console.log(lastThree); // Output: [3, 4, 5]
+```
+
+Copying an Array
+```
+const original = [1, 2, 3];
+const copy = original.slice();
+
+console.log(copy); // Output: [1, 2, 3]
+```
+
+Using slice() in Function Arguments
+```
+function list() {
+  return Array.prototype.slice.call(arguments);
+}
+
+const list1 = list(1, 2, 3); // Creates a new array [1, 2, 3]
+console.log(list1); // Output: [1, 2, 3]
+```
+
+Use Cases:
+
+1. Creating Subarrays: Extracting specific portions of an array for processing or display.
+2. Copying Arrays: Making a shallow copy of an array to avoid mutating the original array when performing operations.
+3. Arguments Object: Converting the arguments object into a real array in functions that use variadic arguments.
+4. Pagination: Displaying a subset of data by slicing the data array based on pagination parameters.
+
+
+<br><br>
+
+## splice
 
 <br><br>
 
