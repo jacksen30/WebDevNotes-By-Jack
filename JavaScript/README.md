@@ -10,6 +10,9 @@
 - [Destructuring](#array-destructuring)
   - [Array Destructuring](#array-destructuring)
   - [Object Destructuring](#object-destructuring)
+- [Ternary Operator](#ternary-operator)
+- [Rest Parameter](#rest-parameter)
+- [Spread Syntax](#spread-syntax)
 - [Array Methods](#array-methods)
   - [Push](#push)
   - [Pop](#pop)
@@ -25,6 +28,7 @@
   - [Splice](#splice)
 - [Code Snippets](#code-snippets)
   - [Generate A Random Number](#generate-a-random-number)
+- [Glossary - Programming Terminology](#glossary-programming-terminology)
 
 <br>
 // Add anchor tags here to other my other notes repos - HTML, CSS, TypeScript, React ect
@@ -45,7 +49,7 @@ Notes to write next:
 * for loop - with the use of break and continue - refer to scrimba - JS mini Projects - for loop break and continue - lesson
 * Loops, for, for of /
 * forEach
-* Add a glossary / word dictionary for words such as, callback function, return, closure, break, continue
+* Add a glossary / word dictionary for words such as, callback function, return, closure, break, continue, operands, control flow, OOP, functional programming
 
 Format and style these readme's better
 Look up most popular JS array methods on youtube
@@ -456,8 +460,6 @@ const person = { name: 'Alex', age: 22 };
 introduce(person); // "My name is Alex and I am 22 years old."
 ```
 
-
-
 Use Cases:
 
 1. Function Parameters: Simplifies working with objects as function parameters by directly unpacking the needed properties within the function's signature, reducing the need for repetitive property access within the function body.
@@ -466,6 +468,204 @@ Use Cases:
 4. Multiple Return Values: Allows for returning multiple values from a function in an object and unpacking these values concisely, simulating named return values.
 5. Swapping Values: Enables an elegant way to swap the values of two variables without needing a temporary variable.
 
+<br><br>
+
+# Ternary Operator
+
+The ternary operator is a concise way to perform an if-else statement in a single line of code.<br>
+However, for complex conditions or multiple if-else branches, traditional control flow statements might be more appropriate to maintain code readability.<br>
+It is the only JavaScript operator that takes three operands: a condition, a result for true, and a result for false.
+
+The ternary operator is very versatile, It can be used for conditional assignments, function calls, and even inline conditional operations without the need for multiple lines of code.
+
+Syntax:
+```
+condition ? expressionIfTrue : expressionIfFalse;
+```
+* condition: An expression that is evaluated for a boolean value.
+* expressionIfTrue: The expression to execute if the condition is true.
+* expressionIfFalse: The expression to execute if the condition is false.
+
+Code Examples:
+
+Basic Usage
+```
+const age = 18;
+const canVote = age >= 18 ? 'Yes' : 'No';
+console.log(canVote); // Output: "Yes"
+```
+
+Nested Ternary<br>
+Ternary operators can be nested, but for the sake of readability, it's generally better to use them sparingly in such cases.
+```
+const score = 85;
+const grade = score >= 90 ? 'A' :
+              score >= 80 ? 'B' :
+              score >= 70 ? 'C' :
+              score >= 60 ? 'D' : 'F';
+
+console.log(grade); // Output: "B"
+```
+
+Choosing Between Two Functions
+```
+const isLoggedIn = true;
+isLoggedIn ? logout() : login();
+
+function login() {
+  console.log('Logging in...');
+}
+
+function logout() {
+  console.log('Logging out...');
+}
+
+// Output: "Logging out..."
+```
+
+Assigning Variables Based on Condition
+```
+const time = 9;
+const timeOfDay = time < 12 ? 'Morning' : 'Afternoon';
+
+console.log(`Good ${timeOfDay}!`); // Output: "Good Morning!"
+```
+
+Use Cases:
+
+1. Conditional Rendering: Useful in UI programming, such as JavaScript frameworks (React, Vue.js), for conditionally rendering elements.
+2. Quick Decisions: Handy for making quick decisions between two values or executing one of two functions.
+3. Inline Conditions: Simplifies expressions where traditional if-else statements would be too verbose.
+
+<br><br>
+
+# Rest Parameter
+
+The rest parameter syntax allows a function to accept an indefinite number of arguments as an array, providing a way to handle function parameters more flexibly.<br>
+Unlike the arguments object, rest parameters are real arrays, and thus, array methods like map, reduce, or forEach can be applied directly.
+
+
+Syntax:
+```
+function functionName(...restParameters) {
+  // function body
+}
+```
+
+...restParameters: An array containing the rest of the function's arguments. This allows the function to collect any number of arguments into an array.
+
+Code Examples:
+
+Collecting Arguments into an Array
+```
+function sum(...numbers) {
+  return numbers.reduce((acc, current) => acc + current, 0);
+}
+
+console.log(sum(1, 2, 3, 4)); // Output: 10
+```
+
+Using Rest Parameters with Other Parameters
+```
+function fullName(firstName, lastName, ...titles) {
+  const titleStr = titles.join(' ');
+  return `${titleStr} ${firstName} ${lastName}`;
+}
+
+console.log(fullName('John', 'Doe', 'Dr.', 'PhD')); // Output: "Dr. PhD John Doe"
+```
+
+Rest Parameters vs. arguments Object<br>
+Rest parameters provide a real array, so array methods like map, reduce, or forEach can be directly applied, which is not the case with the arguments object.
+```
+function countArguments(...args) {
+  return args.length; // args is a real array
+}
+
+console.log(countArguments('a', 'b', 'c')); // Output: 3
+```
+
+Use Cases:
+
+1. Variadic Functions: Functions that take an indefinite number of arguments, such as mathematical operations (sum, min, max) or string manipulation functions.
+2. Parameter Grouping: When you have a function that takes a fixed number of parameters followed by a variable number of parameters (e.g., a logging function that takes a prefix followed by any number of messages).
+3. Function Overloading: Simulating function overloading by handling different numbers of arguments and types dynamically within a single function.
+
+<br><br>
+
+# Spread Syntax
+
+The spread syntax (...) allows an iterable such as an array, string, or object to be expanded in places where zero or more arguments (for function calls), elements (for array literals), or key-value pairs (for object literals) are expected.<br> Introduced in ES6, it provides a more concise and readable way to perform various operations that involve combining or spreading out elements of iterable objects.
+
+The spread syntax is very versatile, It can be used in various contexts, including function calls, array, and object literals.<br>
+When used with objects and arrays, the spread syntax creates a shallow copy, meaning that it copies properties and elements by reference for nested objects or arrays.<br><br>
+
+Syntax:
+```
+Function Calls: myFunction(...iterableObj);
+
+Array Literals or Strings: [...iterableObj, 'newElement', anotherArray];
+
+Object Literals: {...obj, newProp: 123};
+```
+<br>
+
+Code Examples:
+
+In Function Calls<br>
+Expands an array into individual arguments in a function call.
+```
+function sum(x, y, z) {
+  return x + y + z;
+}
+
+const numbers = [1, 2, 3];
+console.log(sum(...numbers)); // Output: 6
+```
+
+In Array Literals<br>
+Combines arrays or adds elements to an array.
+```
+const fruits = ['apple', 'banana'];
+const moreFruits = ['orange', 'grape', ...fruits];
+
+console.log(moreFruits); // Output: ['orange', 'grape', 'apple', 'banana']
+```
+
+In Object Literals<br>
+Copies properties from one object to another.
+```
+const user = { name: 'John', age: 30 };
+const updatedUser = { ...user, age: 31 };
+
+console.log(updatedUser); // Output: { name: 'John', age: 31 }
+```
+
+Copying Arrays<br>
+Creates a shallow copy of an array.
+```
+const arr = [1, 2, 3];
+const arrCopy = [...arr];
+
+console.log(arrCopy); // Output: [1, 2, 3]
+```
+
+Concatenating Arrays
+```
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+const combinedArr = [...arr1, ...arr2];
+
+console.log(combinedArr); // Output: [1, 2, 3, 4, 5, 6]
+```
+
+Use Cases:
+
+1. Function Arguments: Passing an array of values as individual arguments to a function.
+2. Combining or Concatenating Arrays: Easily merge or concatenate multiple arrays without concat().
+3. Object Cloning and Merging: Creating copies of objects or merging multiple objects into a new object.
+4. Converting Iterables to Arrays: Turning iterable values (like NodeLists or Strings) into arrays to use array methods.
+5. React Props or State: Spreading props in React components or merging state objects in a concise manner.
 
 <br><br>
 
@@ -1185,3 +1385,67 @@ const getRandomNumberInRange = (min, max) => Math.floor(Math.random() * (max - m
 const randomNumber = getRandomNumberInRange(1, 100);
 console.log(`Random number between 1 and 100: ${randomNumber}`);
 ```
+
+
+
+# Glossary Programming Terminology
+
+**JavaScript (JS) :** A high-level, dynamic programming language used to create interactive effects within web browsers. It is a core technology of the web, alongside HTML and CSS.
+
+**Variable :** A symbolic name associated with a value and used to store data. In JavaScript, variables are declared using var, let, or const.
+
+**Function :** A block of code designed to perform a particular task. It is executed when "called" (invoked).
+
+**Array :** An ordered collection of items, where each item can be accessed by its index (position in the array).
+
+**Object :** A collection of related data and/or functionality (properties and methods), stored as key-value pairs. Objects are used to model real-world entities and relationships.
+
+**Scope :** The current context of execution where variables, functions, and objects are accessible. JavaScript has both global and local (function) scopes.
+
+**Closure :** A feature where an inner function has access to the outer (enclosing) function’s variables — a scope chain.
+
+**Promise:** An object representing the eventual completion (or failure) of an asynchronous operation and its resulting value.
+
+**Callback Function:** A function passed into another function as an argument and executed at a later time upon an event or the completion of an asynchronous operation.
+
+**Arrow Function:** A shorter syntax for writing functions using =>. Arrow functions do not have their own this, arguments, super, or new.target.
+
+**Asynchronous Programming:** A programming method used to run tasks concurrently without blocking the execution thread, using features like callbacks, promises, and async/await.
+
+**Event Loop:** A JavaScript runtime model that handles executing multiple chunks of code over time, allowing for non-blocking operations.
+
+**DOM (Document Object Model):** A programming interface for web documents. It represents the page so that programs can change the document structure, style, and content.
+
+**Event:** An action or occurrence recognized by software, often triggered by user interactions. JavaScript uses events to perform tasks in web pages.
+
+**JSON (JavaScript Object Notation):** A lightweight data-interchange format, easy for humans to read and write, and for machines to parse and generate.
+
+**Hoisting:** JavaScript's default behavior of moving declarations to the top of the current scope (script or function) before code execution.
+
+**Prototype:** A mechanism by which JavaScript objects inherit features from one another. Every JavaScript object has a prototype property.
+
+**this Keyword:** Refers to the object it belongs to, providing a way to reference the object that is currently calling the function.
+
+**Strict Mode:** A way to opt in to a restricted variant of JavaScript, aiming to catch more errors and providing a cleaner syntax.
+
+**Template Literals:** String literals allowing embedded expressions and multi-line strings, enclosed by backticks (``).
+
+**Module:** A reusable piece of JavaScript code that can be exported from one program and imported for use in another program.
+
+**ECMAScript (ES):** A standardized version of JavaScript. ES6/ES2015 introduced significant changes and improvements to the language.
+
+**Type Coercion:** The automatic or implicit conversion of values from one data type to another (e.g., string to number).
+
+**Truthy and Falsy:** Terms used in JavaScript to describe values that are coerced to true or false in a Boolean context.
+
+**Execution Context:** The environment in which JavaScript code is executed, including everything the JavaScript code has access to at a given time.
+
+**Garbage Collection:** The process of automatically freeing up memory space that is no longer in use or referenced, to prevent memory leaks.
+
+**IIFE (Immediately Invoked Function Expression):** A JavaScript function that runs as soon as it is defined.
+
+**Spread Operator:** Allows an iterable such as an array expression or string to be expanded in places where zero or more arguments or elements are expected.
+
+**Destructuring Assignment:** A JavaScript expression that makes it possible to unpack values from arrays, or properties from objects, into distinct variables.
+
+**Event Delegation:** A technique for adding event listeners to a parent element instead of adding them to the descendant elements individually.
