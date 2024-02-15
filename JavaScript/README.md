@@ -13,6 +13,8 @@
 - [Ternary Operator](#ternary-operator)
 - [Rest Parameter](#rest-parameter)
 - [Spread Syntax](#spread-syntax)
+- [Short Circuiting](#short-circuiting)
+- [Switch Statements](#switch-statements)
 - [Array Methods](#array-methods)
   - [Push](#push)
   - [Pop](#pop)
@@ -666,6 +668,172 @@ Use Cases:
 3. Object Cloning and Merging: Creating copies of objects or merging multiple objects into a new object.
 4. Converting Iterables to Arrays: Turning iterable values (like NodeLists or Strings) into arrays to use array methods.
 5. React Props or State: Spreading props in React components or merging state objects in a concise manner.
+
+<br><br>
+
+# Short Circuiting
+
+Short circuiting in JavaScript refers to the evaluation logic in boolean expressions, where the expression evaluation can stop early without examining all operands.<br>
+This behavior is exploited in logical operations (&& and ||) to execute code conditionally without using if-else statements.
+
+Short circuiting can make code more concise and potentially more efficient by avoiding unnecessary evaluations.<br>
+Using short circuiting for conditional assignments or function calls can improve code readability but should be used judiciously to avoid confusion.<br>
+Logical operators can be used for conditions beyond simple boolean checks, allowing for creative conditional execution patterns.<br><br>
+
+**Logical OR (||)**<br>
+
+The OR operator (||) evaluates expressions from left to right. It returns the value of the first operand that converts to true, or the value of the last operand if all are falsy.<br>
+
+Often used to provide a default value for a variable.<br>
+
+Example:
+```
+const name = "";
+const defaultName = name || "John Doe";
+console.log(defaultName); // Output: "John Doe"
+
+// In this example, because name is an empty string (a falsy value), the OR operation short-circuits and defaultName is set to "John Doe".
+```
+<br><br>
+
+**Logical AND (&&)**<br>
+
+The AND operator (&&) evaluates expressions from left to right. It returns the value of the first operand that converts to false, or the value of the last operand if all are truthy.
+
+Used to execute a statement only if all conditions are true.<br>
+
+Example:
+```
+const isLogged = true;
+const hasPermission = true;
+isLogged && hasPermission && console.log("Access granted");
+
+// In this case, "Access granted" is logged because both isLogged and hasPermission are true, so the console.log statement executes.
+```
+
+Combining && and ||<br>
+Short-circuiting can be combined in various ways to perform complex conditional logic without if-else statements.<br>
+
+Example:
+```
+const user = null;
+const defaultAvatar = "default.jpg";
+
+const avatar = user && user.avatar || defaultAvatar;
+console.log(avatar); // Output: "default.jpg"
+
+// Here, if user is null (falsy), the AND (&&) operation short-circuits, and defaultAvatar is used because of the OR (||) operation.
+```
+
+Setting Default Values: Use the OR (||) operator to assign default values to variables when the initial value is falsy.
+```
+const username = user.name || 'Guest';
+```
+
+Conditional Execution of Functions: Use the AND (&&) operator to execute functions or expressions only if the preceding condition is true.
+```
+isLoggedIn && displayDashboard();
+```
+
+Guard Clauses in Functions: Prevent execution of a function if certain conditions are not met, reducing nested if statements.
+```
+function processUser(user) {
+  user.isActive && updateUser(user);
+}
+```
+
+Chaining Optional Properties: Safely access nested properties in objects without causing a TypeError if a property in the chain is undefined or null, using the AND (&&) operator.
+```
+const streetName = user && user.address && user.address.street;
+```
+
+Combining Conditions for Complex Logic: Combine && and || for more complex conditional logic without needing multiple if-else statements.
+```
+const canEdit = user.isAdmin || (user.isEditor && post.isDraft);
+```
+
+<br><br>
+
+# Switch Statements
+
+The switch statement evaluates an expression, matching the expression's value to a case clause, and executes statements associated with that case, as well as statements in cases that follow the matching case.
+
+Switch statements offer a structured way to organize multiple branches of logic based on the value of a single expression, improving readability and maintainability for certain types of conditional logic.
+
+Switch statements can be more readable than if-else if there are many conditions.<br>
+Uses strict comparison (===) for matching cases.<br>
+Variables declared within a switch block are scoped to the switch block.<br>
+
+Syntax:
+```
+switch (expression) {
+  case value1:
+    // Statements executed when the result of expression matches value1
+    break;
+  case value2:
+    // Statements executed when the result of expression matches value2
+    break;
+  // More cases can be added as needed
+  default:
+    // Statements executed if none of the cases match the expression
+}
+```
+
+* expression: The expression whose result is matched against each case clause.
+* case value: A label where the program jumps to if the expression matches the case.
+* break: Terminates the switch statement; without it, the program continues to the next case.
+* default (optional): A clause that will execute if no case matches. It's not mandatory to have a default clause.
+
+Code Examples:
+
+Basic Example
+```
+const fruit = 'apple';
+
+switch (fruit) {
+  case 'banana':
+    console.log('Bananas are $0.5 per pound.');
+    break;
+  case 'apple':
+    console.log('Apples are $0.7 per pound.');
+    break;
+  case 'avocado':
+    console.log('Avocados are $1.5 per pound.');
+    break;
+  default:
+    console.log('Sorry, we are out of ' + fruit + '.');
+}
+
+// Output: "Apples are $0.7 per pound."
+```
+
+Using Multiple Cases for the Same Code Block
+```
+const grade = 'B';
+
+switch (grade) {
+  case 'A':
+  case 'B':
+  case 'C':
+    console.log('You passed!');
+    break;
+  case 'D':
+  case 'F':
+    console.log('You failed.');
+    break;
+  default:
+    console.log('Invalid grade.');
+}
+
+// Output: "You passed!"
+```
+
+
+Use Cases:
+
+1. Enumerated Values: Particularly useful when dealing with known, enumerable values (e.g., days of the week).
+2. Menu Systems: Handling different user input commands or menu selections.
+3. State Management: Managing state transitions in applications or games.
 
 <br><br>
 
