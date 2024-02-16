@@ -43,6 +43,8 @@ Notes to write next:
 * SPLICE
 * REDUCE METHOD
 * DEFAULT PARAMETERS
+* CONSTRUCTORS - Date(), Error()
+* setTimeout() function / method
 
 * More of the basic array methods
 * Rest Parameters (ES6)
