@@ -30,7 +30,9 @@
   - [Splice](#splice)
 - [Code Snippets](#code-snippets)
   - [Generate A Random Number](#generate-a-random-number)
+- [Helpful JavaScript Developer - Tools and Resources](#helpful-javascript-developer-tools-and-resources)
 - [Glossary - Programming Terminology](#glossary-programming-terminology)
+
 
 <br>
 // Add anchor tags here to other my other notes repos - HTML, CSS, TypeScript, React ect
@@ -1554,7 +1556,60 @@ const randomNumber = getRandomNumberInRange(1, 100);
 console.log(`Random number between 1 and 100: ${randomNumber}`);
 ```
 
+<br><br>
 
+# Helpful JavaScript Developer Tools and Resources
+
+## cdnjs
+
+[cdnjs](https://cdnjs.com/) is a free and open-source Content Delivery Network (CDN) service that hosts a wide range of libraries, plugins, and frameworks related to web development.<br>
+It provides developers with an easy and efficient way to include popular JavaScript libraries, CSS frameworks, fonts, and other web resources directly into their web pages.<br>
+
+Reasons to consider using:
+
+1. Free to Use: cdnjs is completely free, making it accessible to projects of all sizes.
+2. Implementing libraries from cdnjs is as simple as including a link to the CDN-hosted file in your HTML document. This eliminates the need to download, host, and manage these files on your own server.
+3. Wide Library Selection: cdnjs hosts thousands of libraries, including jQuery, Bootstrap, React, Angular, and many others, covering a vast array of functionalities and use cases.
+4. In some cases using cdnjs can help improved performance, reduced server load and increased reliability due to the distributed nature of a CDN means that if one server is unavailable, the content can be served from another server without interrupting the user's access to your website.
+
+## uuid
+
+The uuid library, available on GitHub at [uuidjs/uuid](https://github.com/uuidjs/uuid#cdn-builds), can be effortlessly incorporated into your web projects.<br>
+This method delivers the uuid library directly to your web pages, facilitating the generation of universally unique identifiers (UUIDs) in your JavaScript applications.<br>
+
+Example Of Use:<br>
+// Utilizing the uuidv4() function from the 'uuid' library to generate a unique identifier for a new cafe deal and appending it to the cafeDeals array.
+```
+import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
+
+const cafeDeals = [
+    {
+    cafe: 'Quiet Life Cafe',
+    meal: 'Coffee and Cake Combo',
+    price: 10,
+    uuid: '4fb2b6b7-c7ee-4c80-8de1-390e89f43d7f'
+    },
+];
+
+cafeDeals.push({
+    cafe: 'Coffee Shack',
+    meal: 'Beef Burger Combo',
+    price: 7,
+    uuid: uuidv4()
+    });
+
+
+console.log(cafeDeals[1]); // Output: { "cafe": "Coffee Shack", "meal": "Beef Burger Combo", "price": 7, "uuid": "ed3ad93d-2647-4a43-822c-4bfc223d514d" }
+```
+
+Reasons to consider using:
+
+1. Free to Use: uuidjs is completely free, making it accessible to projects of all sizes.
+2. Ease of Integration: Including uuid via a CDN link directly in your JavaScript simplifies the process of adding unique identifier generation capabilities to your projects without the need to manually download and host the library.
+3. Reduced Project Complexity: By leveraging the CDN delivery, you eliminate the need for local library management, streamlining your project's dependencies and setup.
+4. Improved Performance: Delivering uuid from a CDN can enhance your application's load times since CDNs are optimized to serve content from the closest location to the user, reducing latency.
+
+<br><br>
 
 # Glossary Programming Terminology
 
@@ -1617,3 +1672,7 @@ console.log(`Random number between 1 and 100: ${randomNumber}`);
 **Destructuring Assignment:** A JavaScript expression that makes it possible to unpack values from arrays, or properties from objects, into distinct variables.
 
 **Event Delegation:** A technique for adding event listeners to a parent element instead of adding them to the descendant elements individually.
+
+**CDN (Content Delivery Network):** A distributed network of servers strategically located across different geographical areas, designed to deliver internet content, such as webpages, images, and videos, to users more efficiently. By caching content closer to the user's location, CDNs reduce latency, improve site load times, and enhance user experience. They also provide protection against large surges in traffic and DDoS attacks.
+
+**UUID (Universally Unique Identifier):** A 128-bit number used to uniquely identify information in computer systems. UUIDs are generated through algorithms that ensure a high probability of uniqueness over space and time, making them ideal for identifying objects within distributed systems without significant central coordination. They are commonly represented as 32 hexadecimal digits, displayed in five groups separated by hyphens (e.g., 123e4567-e89b-12d3-a456-426614174000).
