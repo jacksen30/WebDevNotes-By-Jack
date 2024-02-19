@@ -47,14 +47,14 @@ Notes to write next:
 * setTimeout() function / method
 
 * More of the basic array methods
-* Rest Parameters (ES6)
-* Spread operator
+* setTieout()
 * Logical operators
 * Math functions
 * Selectors such as getElementById ect
 * for loop - with the use of break and continue - refer to scrimba - JS mini Projects - for loop break and continue - lesson
 * Loops, for, for of /
 * forEach
+* typeof()
 * Add a glossary / word dictionary for words such as, callback function, return, closure, break, continue, operands, control flow, OOP, functional programming
 
 Format and style these readme's better
@@ -682,7 +682,11 @@ This behavior is exploited in logical operations (&& and ||) to execute code con
 
 Short circuiting can make code more concise and potentially more efficient by avoiding unnecessary evaluations.<br>
 Using short circuiting for conditional assignments or function calls can improve code readability but should be used judiciously to avoid confusion.<br>
-Logical operators can be used for conditions beyond simple boolean checks, allowing for creative conditional execution patterns.<br><br>
+Logical operators can be used for conditions beyond simple boolean checks, allowing for creative conditional execution patterns.<br>
+
+Simple video explanations available at:<br>
+www.youtube.com/watch?v=O4QKfjh8jJM<br>
+www.youtube.com/shorts/CuQtGx9kywY<br><br>
 
 **Logical OR (||)**<br>
 
@@ -1545,6 +1549,59 @@ Use Cases:
 
 ## splice
 
+The splice() method in JavaScript is used to change the contents of an array by removing, replacing, or adding new elements.<br>
+This method directly modifies the original array and can serve multiple purposes: deletion, insertion, and replacement of elements within an array.
+
+The splice method returns an array containing the deleted elements. If no elements are removed, it returns an empty array.
+
+The length of the array is automatically updated based on the operation performed.
+
+* If you instead want to access part of an array without modifying it, use the [Slice() method](#slice)
+<br><br>
+
+Syntax:
+```
+array.splice(start, deleteCount, item1, item2);
+```
+
+* start: The index at which to start changing the array. If negative, it indicates an offset from the end of the array.
+* deleteCount (Optional): The number of elements to remove from the start index. If omitted, all elements from the start to the end of the array will be removed.
+* item1, item2, (Optional): Elements to add to the array, starting from the start index.
+
+<br>
+
+Code Examples:
+
+Removing Elements
+```
+const fruits = ['apple', 'banana', 'cherry', 'dates'];
+const removed = fruits.splice(1, 2); // Removes 'banana' and 'cherry'
+
+console.log(fruits); // Output: ['apple', 'dates']
+console.log(removed); // Output: ['banana', 'cherry']  (returning the elements what were removed from fruits arr during the function call to splice)
+```
+
+Adding Elements
+```
+const colors = ['red', 'blue'];
+colors.splice(1, 0, 'green', 'yellow'); // Adds 'green' and 'yellow' at index 1
+
+console.log(colors); // Output: ['red', 'green', 'yellow', 'blue']
+```
+
+Replacing Elements
+```
+const scores = [1, 2, 3, 4, 5];
+scores.splice(2, 2, 99, 100); // Replaces elements at indexes 2 and 3 with 99 and 100
+
+console.log(scores); // Output: [1, 2, 99, 100, 5]
+```
+
+Use Cases:
+1. Dynamically Modifying Arrays: Ideal for scenarios where you need to dynamically adjust the contents of an array based on application logic, such as managing items in a list.
+2. Managing Data Sets: Useful for adding, removing, or replacing items in a data set, such as updating a list of users or products.
+3. Array Manipulation: Employed in complex array manipulations where direct and in-place modification of the array is required.
+
 <br><br>
 
 # Code Snippets
@@ -1558,6 +1615,19 @@ const randomNumber = getRandomNumberInRange(1, 100);
 console.log(`Random number between 1 and 100: ${randomNumber}`);
 ```
 
+<br><br>
+
+### Get The Current Year
+
+* As a number data type (numeric Value):
+```
+const currentYear = new Date().getFullYear();
+```
+
+* As a string data type:
+```
+const currentYear = new Date().getFullYear().toString();
+```
 <br><br>
 
 # Helpful JavaScript Developer Tools and Resources
