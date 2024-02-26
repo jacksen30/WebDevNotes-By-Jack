@@ -28,6 +28,7 @@
   - [Reduce](#reduce)
   - [Slice](#slice)
   - [Splice](#splice)
+- [Advanced Console Methods - Useful When Debugging](#advanced-console-methods)
 - [Code Snippets](#code-snippets)
   - [Generate A Random Number](#generate-a-random-number)
 - [Helpful JavaScript Developer - Tools and Resources](#helpful-javascript-developer-tools-and-resources)
@@ -1601,6 +1602,129 @@ Use Cases:
 1. Dynamically Modifying Arrays: Ideal for scenarios where you need to dynamically adjust the contents of an array based on application logic, such as managing items in a list.
 2. Managing Data Sets: Useful for adding, removing, or replacing items in a data set, such as updating a list of users or products.
 3. Array Manipulation: Employed in complex array manipulations where direct and in-place modification of the array is required.
+
+<br><br>
+
+# Advanced Console Methods
+
+The console object in JavaScript is most commonly used with console.log for debugging purposes.<br>
+However, it offers a variety of other methods that can greatly enhance debugging sessions and provide more structured and informative outputs.<br>
+
+Here are some lesser-known yet cool console methods that can significantly improve your debugging experience by providing more context, structure, and detail to your console output.
+<br>
+
+console.table()<br>
+This method displays tabular data as a table. It can be very handy when you need to visualize arrays or objects in a structured format.
+
+```
+const people = [
+  { name: 'John', age: 30 },
+  { name: 'Jane', age: 25 }
+];
+
+console.table(people);
+```
+
+console.assert()<br>
+This method writes an error message to the console if the assertion is false. If the assertion is true, nothing happens. It's useful for testing invariants within your code.
+```
+console.assert(1 === 2, 'Assertion failed: 1 is not equal to 2');
+```
+
+console.warn() and console.error()<br>
+These methods output warning and error messages to the console. They can help differentiate between normal log messages, warnings, and errors.
+```
+console.warn('This is a warning');
+
+console.error('This is an error');
+```
+
+console.time() and console.timeEnd()<br>
+These methods help you measure how long an operation takes. You start a timer with console.time() and end it with console.timeEnd(), passing the same label to both. The console then logs the time elapsed.
+```
+console.time('Array initialization');
+let arr = new Array(1000000).fill(0);
+console.timeEnd('Array initialization');
+```
+
+console.group() and console.groupEnd()<br>
+These methods allow you to group related messages together. You can nest groups and collapse or expand them in the console to better organize the output.
+```
+console.group('Fruit Details');
+console.log('Name: Apple');
+console.log('Color: Red');
+console.groupEnd();
+
+console.group('Vehicle Details');
+console.log('Type: Car');
+console.log('Color: Blue');
+console.groupEnd();
+```
+
+console.count()<br>
+This method logs the number of times it has been called with a particular label. It's useful for counting occurrences or ensuring a piece of code has run a certain number of times.
+```
+console.count('Loop');
+console.count('Loop');
+console.countReset('Loop'); // Resets the counter
+console.count('Loop');
+```
+
+console.dir()<br>
+This method displays an interactive list of the properties of a specified JavaScript object. This can be helpful for inspecting objects in detail.
+```
+const obj = { a: 1, b: 'Hello' };
+
+console.dir(obj);
+```
+
+console.trace()<br>
+This method outputs a stack trace to the console, showing how the code ended up at a certain point. It's helpful for debugging by tracing function calls.
+```
+function firstFunction() {
+  secondFunction();
+}
+
+function secondFunction() {
+  console.trace('Trace');
+}
+
+firstFunction();
+```
+
+## Using CSS properties with console.log()
+
+Using CSS properties with console.log() in JavaScript can add a visual enhancement to your log messages, making them more noticeable and easier to differentiate from other messages in the console.<br>
+Whether you're using it to highlight errors, categorize logs, or simply make your console output more engaging, it's a useful technique to have in your JavaScript debugging toolkit.
+
+To apply CSS styles to your console messages, follow this syntax:
+
+```
+console.log('%cYour message', 'CSS-properties');
+
+// Replace 'Your message' with the text you want to log, and 'CSS-properties' with the CSS styles you want to apply. The CSS properties should be written in the same string syntax you would use in a stylesheet.
+```
+
+Code Examples:
+
+Here's a simple example to change the color and font-size of the message:
+```
+console.log('%cThis is a styled message', 'color: blue; font-size:20px');
+```
+
+Multiple Styles<br>
+You can apply multiple styles within the same console.log() by including additional %c directives and corresponding style strings:<br>
+```
+console.log('%cMessage part 1 %cMessage part 2', 'color: red;', 'color: green; font-weight: bold;');
+
+// This will output "Message part 1" in red, and "Message part 2" in green and bold.
+```
+
+Use Cases:
+
+1. Highlighting Important Logs: Make critical messages stand out with bold text or distinctive colors.<br>
+2. Categorizing Logs: Use different colors or styles for logs of different levels (info, warning, error) or parts of an application.<br>
+3. Enhancing Readability: Apply styles like background-color, padding, or border to make complex log messages more readable.<br>
 
 <br><br>
 
