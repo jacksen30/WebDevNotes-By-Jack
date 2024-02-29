@@ -7,6 +7,7 @@
 - [Functions](#functions)
   - [Traditional Functions](#functions)
   - [Arrow Functions](#arrow-functions)
+- [Guard Clauses](#guard-clauses)
 - [Destructuring](#array-destructuring)
   - [Array Destructuring](#array-destructuring)
   - [Object Destructuring](#object-destructuring)
@@ -41,8 +42,6 @@
 <br><br><br>
 Notes to write next:
 
-* SPLICE
-* REDUCE METHOD
 * DEFAULT PARAMETERS
 * CONSTRUCTORS - Date(), Error()
 * setTimeout() function / method
@@ -60,7 +59,6 @@ Notes to write next:
 
 Format and style these readme's better
 Look up most popular JS array methods on youtube
-
 
 <br><br>
 
@@ -174,8 +172,14 @@ A deep copy goes further by duplicating every level of an object, including all 
 Functions in JavaScript are blocks of code designed to perform a particular task, and they are a fundamental building block of the language.<br>
 JavaScript functions can be defined in several ways and can be called or invoked to execute the block of code whenever needed.
 
-Also read [Arrow functions](#arrow-functions) which became available in ES6, they provide a modern and concise syntax for writing function expressions.
+Also read [Arrow functions](#arrow-functions) which became available in ES6, they provide a modern and concise syntax for writing function expressions.<br>
+<br>
 
+> **Important To Remember:** In JavaScript, when using return:<br>
+Exiting a Function: If return is called with no value, the function exits immediately, and undefined is returned to the caller.<br>
+Returning a Value: If return is followed by a value, that value is returned to the function caller, and the function execution stops at that point.
+
+<br>
 
 Function Declaration<br>
 A function declaration defines a function with the specified parameters.
@@ -319,6 +323,83 @@ Use Cases:
 3. Functional Programming: Supports a more functional style of coding with concise function expressions.
 4. Inline Functions: Useful for defining inline functions where brevity is valued.
 5. Lexical this: Arrow functions capture the this value of the enclosing context, making them suitable for use in methods that need to access the this of their containing object.
+
+<br><br>
+
+# Guard Clauses
+
+Guard clauses are used to improve code readability and efficiency by handling edge cases or invalid conditions early in a function or block of code.<br>
+They act as early returns that "guard" against further execution if certain conditions are not met,<br>
+thus avoiding nested if-else statements and making the main logic of the function clearer and less indented.
+
+
+* Early Exit: A guard clause provides an early exit from a function if a condition is not met, reducing the need for additional indentation and nested conditions.
+* Simplification: Simplifies the logic by dealing with edge cases or errors upfront, making the remaining code easier to understand.
+* Improves Readability: Helps in separating the handling of special conditions from the main logic, improving code readability.
+
+<br>
+
+> **Important To Remember:** In JavaScript, when using return:<br>
+Exiting a Function: If return is called with no value, the function exits immediately, and undefined is returned to the caller.<br>
+Returning a Value: If return is followed by a value, that value is returned to the function caller, and the function execution stops at that point.
+
+<br>
+
+Code Examples:<br>
+
+Basic Guard Clause: Handling invalid input in a function.
+```
+function processOrder(order) {
+  if (!order) {
+    console.log('No order provided');
+    return; // Early return if order is not provided
+  }
+
+  // Proceed with order processing
+  console.log('Processing order', order);
+}
+
+processOrder(null); // Output: No order provided
+processOrder('1234'); // Output: Processing order 1234
+```
+
+Multiple Guard Clauses: Using multiple conditions to exit early for different cases.
+```
+function calculateDiscount(price, customer) {
+  if (price <= 0) {
+    return 0; // Early return for invalid price
+  }
+  if (!customer.isPremium) {
+    return price * 0.05; // Standard discount for non-premium customers
+  }
+
+  // Enhanced discount for premium customers
+  return price * 0.1;
+}
+
+console.log(calculateDiscount(100, { isPremium: false })); // Output: 5
+console.log(calculateDiscount(100, { isPremium: true })); // Output: 10
+```
+
+Guard Clauses in Async Functions: Handling missing parameters in asynchronous functions.
+```
+async function fetchData(userId) {
+  if (!userId) {
+    throw new Error('User ID is required');
+  }
+
+  // Fetch data for the given user ID
+  const data = await getUserData(userId);
+  return data;
+}
+```
+
+Use Cases:
+
+1. Input Validation: Early validation of function parameters to ensure they meet certain criteria before proceeding.
+2. Error Handling: Returning errors or default values early in a function when encountering an invalid state.
+3. Feature Flags or Permissions: Checking for permissions or feature flags before executing feature-specific logic.
+4. Guard clauses offer a straightforward and effective way to make code more readable and maintainable by handling special conditions early and keeping the main logic clean and uncluttered.
 
 <br><br>
 
@@ -1412,7 +1493,8 @@ It's designed to accumulate the array's elements into a single value, using a fu
 
 The reduce method is versatile, It can be used for more than just arithmetic operations, Its suitable for transforming arrays into any aggregated form.<br>
 It always returns a single value, even if that value is an array or object.<br>
-Providing an initial value is optional but recommended as it ensures the method behaves predictably for empty arrays or arrays with a single element.
+Providing an initial value is optional but recommended as it ensures the method behaves predictably for empty arrays or arrays with a single element.<br>
+[Click Here to see a great explanation from Web Dev Simplified on youtube](https://www.youtube.com/watch?v=s1XVfm5mIuU)<br>
 
 Syntax:
 ```
@@ -1741,6 +1823,13 @@ console.log(`Random number between 1 and 100: ${randomNumber}`);
 
 <br><br>
 
+### Generate a Random Boolean - 50% chance of returning true
+```
+const randomBoolean = Math.random() >= 0.5;
+```
+
+<br><br>
+
 ### Get The Current Year
 
 * As a number data type (numeric Value):
@@ -1752,6 +1841,28 @@ const currentYear = new Date().getFullYear();
 ```
 const currentYear = new Date().getFullYear().toString();
 ```
+<br><br>
+
+### Enabling Document Edit Mode
+
+```
+document.designMode = 'on';
+```
+
+Enables the "Design Mode" in the web document, making the entire webpage content editable just like a text field.<br>
+This feature is particularly useful for quick editing or testing purposes without needing to modify the HTML code directly through a developer console or editor.<br>
+Allows writers or content creators to experiment with different headings, body text, or layouts directly in the browser.
+
+<br><br>
+
+### Copying Text To Clipboard
+
+```
+const copyText = (text) => navigator.clipboard.writeText(text);
+```
+
+Uses the navigator.clipboard.writeText method to copy text to the user's clipboard, allowing users to easily copy content - commonly implemented to work on a click event on an element or button.
+
 <br><br>
 
 # Helpful JavaScript Developer Tools and Resources
