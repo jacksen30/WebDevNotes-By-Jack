@@ -29,6 +29,7 @@
   - [Reduce](#reduce)
   - [Slice](#slice)
   - [Splice](#splice)
+- [Class / Classes](#classes)
 - [Advanced Console Methods - Useful When Debugging](#advanced-console-methods)
 - [Code Snippets](#code-snippets)
   - [Generate A Random Number](#generate-a-random-number)
@@ -47,7 +48,6 @@ Notes to write next:
 * setTimeout() function / method
 
 * More of the basic array methods
-* setTieout()
 * Logical operators
 * Math functions
 * Selectors such as getElementById ect
@@ -1684,6 +1684,103 @@ Use Cases:
 1. Dynamically Modifying Arrays: Ideal for scenarios where you need to dynamically adjust the contents of an array based on application logic, such as managing items in a list.
 2. Managing Data Sets: Useful for adding, removing, or replacing items in a data set, such as updating a list of users or products.
 3. Array Manipulation: Employed in complex array manipulations where direct and in-place modification of the array is required.
+
+<br><br>
+
+# Classes
+
+Classes are a template for creating objects. They encapsulate data with code to work on that data.<br>
+ES6 introduced classes to JavaScript as a syntactic sugar over the existing prototype-based inheritance, providing a clearer and more traditional syntax for creating objects and dealing with inheritance.<br>
+
+Classes in JavaScript provide a structured framework for implementing object-oriented programming (OOP) principles, such as encapsulation, inheritance, and polymorphism, facilitating the creation of more organized and manageable code.<br>
+
+Key Features:<br>
+* Simpler Syntax for Constructors: Classes provide a straightforward syntax for defining constructor functions and initializing new objects.<br>
+* Method Definition: No need to use the function keyword when defining methods inside a class.<br>
+* Inheritance: Classes make inheritance easier to implement and understand, using the extends and super keywords.<br>
+* Static Methods: Methods that are relevant to the class itself, not to the instances of the class, can be defined using the static keyword.<br>
+
+Key Points:<br>
+* Syntactic Sugar: Classes do not introduce a new object-oriented inheritance model to JavaScript. They are primarily syntactic sugar over the existing prototype-based inheritance.<br>
+* Extends: The extends keyword is used in class declarations or class expressions to create a class as a child of another class.<br>
+* Static Methods: Static methods are called without instantiating their class and cannot be called through a class instance.<br>
+<br>
+
+
+
+Syntax:
+```
+class ClassName {
+  constructor(/* arguments */) {
+    // initialization
+  }
+
+  method1(/* arguments */) {
+    // body
+  }
+
+  static staticMethod1(/* arguments */) {
+    // body
+  }
+}
+```
+<br>
+
+Code Examples:<br>
+
+Defining and Using a Class:
+```
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+
+  introduce() {
+    console.log(`My name is ${this.name}, and I am ${this.age} years old.`);
+  }
+}
+
+const person1 = new Person('Alice', 30);
+person1.introduce(); // Output: My name is Alice, and I am 30 years old.
+```
+
+Inheritance
+```
+class Employee extends Person {
+  constructor(name, age, position) {
+    super(name, age); // Call the parent class constructor
+    this.position = position;
+  }
+
+  describe() {
+    console.log(`${this.name} works as a ${this.position}.`);
+  }
+}
+
+const employee1 = new Employee('Bob', 25, 'Developer');
+employee1.introduce(); // Inherits method from Person
+employee1.describe(); // Output: Bob works as a Developer.
+```
+
+Static Methods
+```
+class Utility {
+  static randomNumber() {
+    return Math.floor(Math.random() * 100);
+  }
+}
+
+console.log(Utility.randomNumber()); // Outputs a random number
+```
+
+
+Use Cases:
+1. Object-Oriented Programming: For implementing encapsulation, inheritance, and polymorphism in complex applications.
+2. UI Components: In frameworks like React for creating and managing reusable UI elements with state and behavior.
+3. Data Models: To define the structure and methods for data entities, facilitating interactions with databases.
+4. Business Logic: For organizing and encapsulating application-specific logic and operations.
+5. Framework Extensions: To extend or customize functionalities in libraries and frameworks through inheritance.
 
 <br><br>
 
