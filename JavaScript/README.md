@@ -30,7 +30,9 @@
   - [Slice](#slice)
   - [Splice](#splice)
 - [Class / Classes](#classes)
+- [Error Handling](#error-handling)
 - [Advanced Console Methods - Useful When Debugging](#advanced-console-methods)
+- [Advanced Debugging Methods - Breakpoints and Watchers](#advanced-debugging-methods)
 - [Code Snippets](#code-snippets)
   - [Generate A Random Number](#generate-a-random-number)
 - [Helpful JavaScript Developer - Tools and Resources](#helpful-javascript-developer-tools-and-resources)
@@ -47,6 +49,7 @@ Notes to write next:
 * CONSTRUCTORS - Date(), Error()
 * setTimeout() function / method
 
+* THIS keyword - *Also note why arrow functions arent used to create methods on an object ast changes how the this keyword is precieved / handled.
 * More of the basic array methods
 * Logical operators
 * Math functions
@@ -55,7 +58,7 @@ Notes to write next:
 * Loops, for, for of /
 * forEach
 * typeof()
-* Add a glossary / word dictionary for words such as, callback function, return, closure, break, continue, operands, control flow, OOP, functional programming
+* Add a glossary / word dictionary for words such as, callback function, return, closure, break, continue, operands, control flow, (OOP) principles, such as encapsulation, inheritance, and polymorphism, functional programming. this - keyword, method - inside a function
 
 Format and style these readme's better
 Look up most popular JS array methods on youtube
@@ -1784,6 +1787,83 @@ Use Cases:
 
 <br><br>
 
+# Error Handling
+
+Error handling in JavaScript, including ES6, revolves around the use of try, catch, finally blocks, and the throw statement.<br>
+This mechanism allows developers to gracefully manage and respond to runtime errors, ensuring that the program can recover from unexpected issues or provide informative feedback to the user.
+
+JavaScript supports different types of built-in error objects such as SyntaxError, TypeError, and more, which can be thrown to represent different types of errors.
+
+>**try - Block**<br>
+>Used to wrap code that may throw an error. If an error occurs within the try block, execution immediately stops in that block and moves to the catch block.
+
+>**catch - Block**<br>
+>Catches the error thrown by the try block, allowing the error to be handled or logged. It receives the error object as a parameter.
+
+>**finally - Block**<br>
+>Executes after the try and catch blocks, regardless of whether an error was thrown. Useful for cleaning up resources or completing tasks that must run after the try/catch.
+
+>**throw - Statement**<br>
+>Used to throw custom errors. It can throw a string, a number, a boolean, or an object.
+
+Error Handling Patterns:<br>
+* Validation: Before performing operations, check for valid input to prevent errors.
+* Promises and Async/Await: For asynchronous code, use .catch() with promises or try...catch with async/await to handle errors.
+* Resource Management: Use finally to release resources or perform clean-up activities, ensuring no resources are left consumed.
+<br>
+
+Code Examples:<br>
+**Basic try...catch**
+```
+try {
+  // Code that may throw an error
+  throw new Error('Something went wrong');
+} catch (error) {
+  console.error(error.message); // Output: Something went wrong
+}
+```
+
+**finally Usage**
+```
+try {
+  console.log('Try block executed');
+  // Error might be thrown here
+} catch (error) {
+  console.error('Caught an error!');
+} finally {
+  console.log('Finally block executed');
+  // Cleanup code or final steps
+}
+// Output: Try block executed
+//         Finally block executed
+```
+
+**Throwing Custom Errors**
+```
+function checkAge(age) {
+  if (age < 18) {
+    throw new Error('Age must be at least 18');
+  }
+  console.log('Age is acceptable');
+}
+
+try {
+  checkAge(16);
+} catch (error) {
+  console.error(error.message); // Output: Age must be at least 18
+}
+```
+
+Use Cases:
+
+1. Validation: To validate input data before processing and throw custom errors if the input does not meet the required criteria.
+2. Asynchronous Error Handling: Catching errors in asynchronous code, such as within promises or async/await functions, to prevent crashes and handle failures gracefully.
+3. Resource Management: Ensuring resources (like file handles or network connections) are properly closed or released in a finally block, regardless of whether an operation succeeds or fails.
+4. API Error Handling: Managing errors from API calls or external resources, allowing for graceful degradation of functionality or user notifications.
+5. Debugging and Development: Throwing and catching errors deliberately during development to test error handling paths and ensure robustness.
+
+<br><br>
+
 # Advanced Console Methods
 
 The console object in JavaScript is most commonly used with console.log for debugging purposes.<br>
@@ -1904,6 +1984,56 @@ Use Cases:
 1. Highlighting Important Logs: Make critical messages stand out with bold text or distinctive colors.<br>
 2. Categorizing Logs: Use different colors or styles for logs of different levels (info, warning, error) or parts of an application.<br>
 3. Enhancing Readability: Apply styles like background-color, padding, or border to make complex log messages more readable.<br>
+
+<br><br>
+
+# Advanced Debugging Methods
+
+Debugging is a critical process in software development, helping developers identify and fix issues in their code.<br>
+Advanced debugging techniques such as breakpoints and watchers significantly enhance the debugging process, providing more control and insight into code behavior.
+<br><br>
+
+### Breakpoints
+Breakpoints are markers that you set in your code or development environment that pause the execution of your program at a specific line of code.<br>
+This allows you to inspect the state of your program at that moment, examine variable values, and step through your code line by line to observe how its state changes over time.
+
+Usage:<br>
+Set directly in the source code using debugger statements (e.g., debugger;) or through the debugging interface of development tools like browser developer tools or IDEs.
+
+Benefits:<br>
+Allow for real-time inspection of code execution, control flow, and state without modifying the source code with log statements.
+
+Example Scenario:<br>
+If a function isn't returning the expected result, placing a breakpoint at the start of the function can help you inspect the input parameters and step through the function's logic to find where it deviates from expected behavior.
+<br><br>
+
+### Watchers
+Watchers (or "watch expressions") are a debugging feature that allows you to specify expressions or variables that you want to monitor.<br>
+When execution is paused (for example, at a breakpoint), the current values of these expressions are evaluated and displayed, allowing you to see how they change as you step through your code.
+
+Usage:<br>
+Set in the debugging interface of your development environment, where you can enter expressions or variable names that the debugger will monitor.
+
+Benefits:<br>
+Provide an efficient way to track how specific variables or expressions change over the course of your program's execution, especially useful for observing the effects of loops or conditional logic.
+
+Example Scenario:<br>
+If you're unsure how a variable's value is changing within a loop, adding that variable to the watch list lets you see its value at each iteration without cluttering your code with additional log statements.
+<br><br>
+
+### Call Stack Inspection
+The call stack represents the sequence of function calls that led to the current execution point.<br>
+Inspecting the call stack during a breakpoint allows you to trace the path of execution and understand how the current code was reached.
+
+Benefit:<br>
+Helps in identifying the flow of execution, especially useful in complex applications with many function calls or asynchronous operations.
+<br><br>
+
+### Network Requests Inspection
+Modern debuggers allow you to inspect HTTP requests and responses made by your application. This includes viewing request parameters, response data, headers, and status codes.
+
+Benefit:<br>
+Essential for debugging applications that rely on APIs or make AJAX requests, as it helps identify issues related to network operations.
 
 <br><br>
 
